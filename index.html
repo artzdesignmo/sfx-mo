@@ -94,7 +94,7 @@ function env(g,t0,a,peak,dec){g.gain.setValueAtTime(0.0001,t0);g.gain.exponentia
 
 /* Each SFX: params [key,label_en,label_zh,min,max,def], build(ctx,dest,params,t0) -> stopTime */
 const SFX=[
-{id:"click",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M5 3l7.5 18 2.5-7.5L22.5 11z"/></svg>',en:"Click",zh:"點擊",desc_en:"Crisp UI click — filtered snap with body.",desc_zh:"清脆 UI 點擊聲 — 濾波 snap 加本體。",
+{id:"click",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="#8a867e" stroke-width="2" stroke-linejoin="round"><path d="M5 3l7.5 18 2.5-7.5L22.5 11z"/></svg>',en:"Click",zh:"點擊",desc_en:"Crisp UI click — filtered snap with body.",desc_zh:"清脆 UI 點擊聲 — 濾波 snap 加本體。",
  params:[["bright","Brightness","亮度",0,1,.6],["decay","Decay","衰減",0,1,.35],["body","Body","厚度",0,1,.5]],
  build(c,dest,p,t0){
   const n=c.createBufferSource();n.buffer=getNoise(c);
@@ -105,7 +105,7 @@ const SFX=[
   const g2=c.createGain();env(g2,t0,0.002,0.5,0.02+p.decay*0.06);
   o.connect(g2);g2.connect(dest);o.start(t0);o.stop(t0+0.2);
   return t0+0.35;}},
-{id:"pop",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="14" r="5.5"/><path d="M12 2.5v2.5M5.5 4.5l1.8 1.8M18.5 4.5l-1.8 1.8"/></svg>',en:"Pop",zh:"泡泡",desc_en:"Bubble pop — pitch drops as it bursts.",desc_zh:"泡泡爆破 — 音高急墜。",
+{id:"pop",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="#8a867e" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="14" r="5.5"/><path d="M12 2.5v2.5M5.5 4.5l1.8 1.8M18.5 4.5l-1.8 1.8"/></svg>',en:"Pop",zh:"泡泡",desc_en:"Bubble pop — pitch drops as it bursts.",desc_zh:"泡泡爆破 — 音高急墜。",
  params:[["pitch","Pitch","音高",0,1,.5],["size","Size","大細",0,1,.5],["wet","Wet","水潤",0,1,.4]],
  build(c,dest,p,t0){
   const dur=0.07+p.size*0.14,f0=320+p.pitch*520;
@@ -118,7 +118,7 @@ const SFX=[
    const g2=c.createGain();env(g2,t0,0.002,0.25*p.wet,dur*0.7);
    n.connect(hp);hp.connect(g2);g2.connect(dest);n.start(t0);n.stop(t0+dur+0.05);}
   return t0+dur+0.1;}},
-{id:"whoosh",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2.5 8.5h9.5a2.75 2.75 0 1 0-2.75-2.75M2.5 12.5h14.5a2.75 2.75 0 1 1-2.75 2.75M2.5 16.5h6"/></svg>',en:"Whoosh",zh:"呼嘯",desc_en:"Air whoosh — noise swept through a band.",desc_zh:"空氣呼嘯 — 噪聲掃過頻帶。",
+{id:"whoosh",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="#8a867e" stroke-width="2" stroke-linecap="round"><path d="M2.5 8.5h9.5a2.75 2.75 0 1 0-2.75-2.75M2.5 12.5h14.5a2.75 2.75 0 1 1-2.75 2.75M2.5 16.5h6"/></svg>',en:"Whoosh",zh:"呼嘯",desc_en:"Air whoosh — noise swept through a band.",desc_zh:"空氣呼嘯 — 噪聲掃過頻帶。",
  params:[["dur","Length","長度",0,1,.5],["bright","Brightness","亮度",0,1,.55],["dir","Direction","方向",0,1,.15]],
  build(c,dest,p,t0){
   const dur=0.35+p.dur*1.6,f1=250,f2=2500+p.bright*5500;
@@ -132,7 +132,7 @@ const SFX=[
   g.gain.exponentialRampToValueAtTime(0.0001,t0+dur);
   n.connect(bp);bp.connect(g);g.connect(dest);n.start(t0);n.stop(t0+dur+0.05);
   return t0+dur+0.1;}},
-{id:"keypress",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="5.5" width="16" height="13" rx="2.5"/><path d="M12 9.5v5M9.5 12h5"/></svg>',en:"Keypress",zh:"鍵盤",desc_en:"Mechanical key — deep thock plus click.",desc_zh:"機械鍵盤 — 低沉 thock 加清脆 click。",
+{id:"keypress",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="#8a867e" stroke-width="2" stroke-linecap="round"><rect x="4" y="5.5" width="16" height="13" rx="2.5"/><path d="M12 9.5v5M9.5 12h5"/></svg>',en:"Keypress",zh:"鍵盤",desc_en:"Mechanical key — deep thock plus click.",desc_zh:"機械鍵盤 — 低沉 thock 加清脆 click。",
  params:[["depth","Depth","深度",0,1,.55],["click","Click","清脆",0,1,.6],["weight","Weight","份量",0,1,.5]],
  build(c,dest,p,t0){
   const o=c.createOscillator();o.type="sine";o.frequency.value=110+p.depth*90;
@@ -143,7 +143,7 @@ const SFX=[
   const g2=c.createGain();env(g2,t0,0.001,0.5,0.015+p.click*0.03);
   n.connect(hp);hp.connect(g2);g2.connect(dest);n.start(t0);n.stop(t0+0.15);
   return t0+0.35;}},
-{id:"impact",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="2.2"/><path d="M12 2.5v3.5M12 18v3.5M2.5 12H6M18 12h3.5M5.3 5.3l2.5 2.5M16.2 16.2l2.5 2.5M18.7 5.3l-2.5 2.5M7.8 16.2l-2.5 2.5"/></svg>',en:"Impact",zh:"撞擊",desc_en:"Deep hit — sub boom with punchy attack.",desc_zh:"深沉撞擊 — 低頻轟鳴加 punch。",
+{id:"impact",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="#8a867e" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="2.2"/><path d="M12 2.5v3.5M12 18v3.5M2.5 12H6M18 12h3.5M5.3 5.3l2.5 2.5M16.2 16.2l2.5 2.5M18.7 5.3l-2.5 2.5M7.8 16.2l-2.5 2.5"/></svg>',en:"Impact",zh:"撞擊",desc_en:"Deep hit — sub boom with punchy attack.",desc_zh:"深沉撞擊 — 低頻轟鳴加 punch。",
  params:[["boom","Boom","轟鳴",0,1,.6],["punch","Punch","衝擊",0,1,.55],["length","Length","長度",0,1,.45]],
  build(c,dest,p,t0){
   const dur=0.5+p.length*1.6;
@@ -157,7 +157,7 @@ const SFX=[
   const g2=c.createGain();env(g2,t0,0.003,0.7,dur*0.35);
   n.connect(lp);lp.connect(g2);g2.connect(dest);n.start(t0);n.stop(t0+dur);
   return t0+dur+0.15;}},
-{id:"riser",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20.5l6-6 4 4 7.5-7.5M15.5 11H21v5.5"/></svg>',en:"Riser",zh:"上升",desc_en:"Tension riser — builds to the drop.",desc_zh:"緊張上升音 — 推向高潮。",
+{id:"riser",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="#8a867e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20.5l6-6 4 4 7.5-7.5M15.5 11H21v5.5"/></svg>',en:"Riser",zh:"上升",desc_en:"Tension riser — builds to the drop.",desc_zh:"緊張上升音 — 推向高潮。",
  params:[["length","Length","長度",0,1,.55],["bright","Brightness","亮度",0,1,.6],["curve","Curve","曲線",0,1,.5]],
  build(c,dest,p,t0){
   const dur=0.6+p.length*2.2,f2=700+p.bright*1600;
@@ -177,7 +177,7 @@ const SFX=[
   g2.gain.exponentialRampToValueAtTime(0.18,t0+dur);g2.gain.exponentialRampToValueAtTime(0.0001,t0+dur+0.08);
   n.connect(hp);hp.connect(g2);g2.connect(dest);n.start(t0);n.stop(t0+dur+0.15);
   return t0+dur+0.2;}},
-{id:"ding",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16v-4.5a6 6 0 1 1 12 0V16l1.2 2.5H4.8zM10 21a2.2 2.2 0 0 0 4 0"/></svg>',en:"Ding",zh:"叮噹",desc_en:"FM bell — notification chime with shimmer.",desc_zh:"FM 鈴聲 — 通知音，帶 shimmer。",
+{id:"ding",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="#8a867e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16v-4.5a6 6 0 1 1 12 0V16l1.2 2.5H4.8zM10 21a2.2 2.2 0 0 0 4 0"/></svg>',en:"Ding",zh:"叮噹",desc_en:"FM bell — notification chime with shimmer.",desc_zh:"FM 鈴聲 — 通知音，帶 shimmer。",
  params:[["pitch","Pitch","音高",0,1,.5],["shimmer","Shimmer","泛音",0,1,.5],["decay","Decay","餘音",0,1,.55]],
  build(c,dest,p,t0){
   const dur=0.8+p.decay*2.8,fc=420+p.pitch*820;
@@ -190,7 +190,7 @@ const SFX=[
   car.connect(g);g.connect(dest);car.start(t0);mod.start(t0);
   car.stop(t0+dur+0.1);mod.stop(t0+dur+0.1);
   return t0+dur+0.15;}},
-{id:"zap",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M13 2.5L4.5 13.5H11l-1 8 8.5-11H12z"/></svg>',en:"Zap",zh:"激光",desc_en:"Sci-fi zap — pitch dive with grit.",desc_zh:"科幻激光 — 音高急墜加顆粒。",
+{id:"zap",icon:'<svg viewBox="0 0 24 24" fill="none" stroke="#8a867e" stroke-width="2" stroke-linejoin="round"><path d="M13 2.5L4.5 13.5H11l-1 8 8.5-11H12z"/></svg>',en:"Zap",zh:"激光",desc_en:"Sci-fi zap — pitch dive with grit.",desc_zh:"科幻激光 — 音高急墜加顆粒。",
  params:[["pitch","Pitch","音高",0,1,.55],["speed","Speed","速度",0,1,.45],["grit","Grit","粗糙",0,1,.5]],
  build(c,dest,p,t0){
   const dur=0.12+p.speed*0.35,f0=750+p.pitch*1300;
